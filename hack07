@@ -1,0 +1,28 @@
+<body>
+ <form id="form1" runat="server">
+ <div>
+ <h2>Cookie Demonstration</h2>
+ <asp:Label ID="lblMessage" runat="server" Text="Cookie Info will appear here." />
+ <h3>Create Cookies</h3>
+ <label for="cookieValue">Enter Cookie Value:</label>
+ <asp:TextBox ID="txtCookieValue" runat="server"></asp:TextBox>
+ <br /><br />
+ <asp:Button ID="btnCreateSessionCookie" runat="server" Text="Create Session Cookie"
+OnClick="btnCreateSessionCookie_Click" />
+  <asp:Button ID="btnCreatePersistentCookie" runat="server" Text="Create Persistent Cookie"
+OnClick="btnCreatePersistentCookie_Click" />
+ <asp:Button ID="btnCreateSecureCookie" runat="server" Text="Create Secure Cookie"
+OnClick="btnCreateSecureCookie_Click" />
+ <br /><br />
+ <h3>Retrieve Cookie</h3>
+ <asp:Button ID="btnRetrieveCookie" runat="server" Text="Retrieve Cookie"
+OnClick="btnRetrieveCookie_Click" />
+ <br /><br />
+ <h3>Delete Cookie</h3>
+ <asp:Button ID="btnDeleteCookie" runat="server" Text="Delete Cookie"
+OnClick="btnDeleteCookie_Click" />
+ </div>
+ </form>
+ <h4>NAME: SANDESH</h4>
+</body>
+</html>
