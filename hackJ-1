@@ -1,0 +1,78 @@
+index.html
+<html>
+<head>
+<title>Login form</title>
+<form action="LoginServlet">
+Enter User ID<input type="text" name="txtid"><br> Enter Password<input type="password" name="txtpass"><br>
+<input type="reset">
+<input type="submit" value=" CLick to Login">
+</form>
+</html>
+  
+login.servlet
+package EJPracts;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class LoginServlet extends HttpServlet {
+ @Override
+ protected void doPost(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+ response.setContentType("text/html;charset=UTF-8");
+ String uname=request.getParameter("txtid");
+ String upass=request.getParameter("txtpass");
+ try (PrintWriter out = response.getWriter()) {
+ out.println("<html><head>");
+ out.println("<title>Login Result..</title></head>"); 
+ out.println("<body>");
+ if ("admin".equals(uname)&&"servlet".equals(upass))
+ {
+ out.println("<h1>Welcome, "+uname+"</h1>");
+ out.println("<p> Login Successful!</p>");
+ }
+ else{
+out.println("<h1 style=color:red>Login Failed</h1>");
+ out.println("<p>Please Check your username and password</P>");
+ out.println("<a href=index.html> Back To Login </a>");
+ }
+ out.println("</body>");
+ out.println("</html>");
+ }
+ catch(IOException e)
+ {
+ throw new ServletException("IOException in LoginServlet",e);
+ }
+ }
+}
+
+Welcome.Servlet
+package EJPracts;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+public class WelcomeServlet extends HttpServlet {
+ protected void doGet(HttpServletRequest request, HttpServletResponse response)
+ throws ServletException, IOException {
+ response.setContentType("text/html;charset=UTF-8");
+ try (PrintWriter out = response.getWriter()) {
+ out.println("<html><head>");
+ out.println("<title>Welcome Page.....</title></head>"); 
+ out.println("<body>");
+ out.println("<h1>Welcome to the system </h1>");
+ out.println("<p> This is the welcome page</p>");
+ out.println("</body>");
+ out.println("</html>");
+ }
+ catch(IOException e)
+ {
+ throw new ServletException("IOException in WelcomeServlet",e);
+ }
+ }
+}
+
