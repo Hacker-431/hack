@@ -1,0 +1,168 @@
+index.html
+<html><head><title>Session Demo</title></head>
+<form action="Pagel" method="get">
+Enter User Id<input type="text" name="txtid"><br>
+<input type="reset"><input type="submit">
+</form>
+</html>
+
+  Page1.java
+package EJPracts;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+importjavax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+public class page1 extends HttpServlet {
+ @Override
+ public void doGet(HttpServletRequest 
+request, HttpServletResponse response)
+ throws ServletException, IOException 
+{response.setContentType("text/html;charset=
+UTF-8");
+ PrintWriter out = response.getWriter();
+ out.println("<html><head><title>Servlet 
+Page1</title></head>");
+ HttpSession hs = 
+request.getSession(true);
+ if(hs.isNew()){
+ out.println("<body bgcolor='pink'>");
+ String 
+name=request.getParameter("txtname");
+ hs.setAttribute("uname", name);
+ hs.setAttribute("visit", "1");
+ out.println("<h1>Welcome First 
+time</h1>");
+ }else {
+ out.println("<h1>Welcome 
+Again</h1>");
+int visit = Integer.parseInt((String) 
+hs.getAttribute("visit"));
+ out.println("<h1>YOU Visited" + visit +" 
+Times</h1>");
+hs.setAttribute("visit",Integer.toString(visit));
+ }
+ out.println("<h1>YOUR Session ID:" + 
+hs.getId() +"</h1>");
+ out.println("<h1>YOU Logged in at:" + 
+new java.util.Date(hs.getCreationTime()) 
++"</h1>"); 
+ out.println("<h1><a href='Page2'> 
+Click to Page 2 </a></h1>");
+ out.println("<h1><a href='Page3'> 
+Click to Page 3 </a></h1>");
+ out.println("<h1><a href='Page4'> 
+Click to Page 4 </a></h1>");
+ out.println("<h1><a 
+href='LogoutServlet'> Click to Terminate 
+Session </a></h1>");
+ out.println("</body>");
+ out.println("</html>");
+ }}
+
+Page2.java
+package EJPracts;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import 
+javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+public class Page2 extends HttpServlet {
+ @Override
+ public void doGet(HttpServletRequest 
+request, HttpServletResponse response)
+ throws ServletException, 
+IOException 
+{response.setContentType("text/html;charset
+=UTF-8");
+ PrintWriter out = response.getWriter();
+ out.println("<html><head><title>Servlet 
+Page2</title></head>");
+ HttpSession hs = 
+request.getSession(false);
+ int visit = Integer.parseInt((String) 
+hs.getAttribute("visit"))+1;
+ out.println("<h1>YOU Visited" + visit +" 
+Times</h1>");
+ hs.setAttribute("visit",visit);
+ out.println("<h1>YOUR Session ID:" + 
+hs.getId() +"</h1>");
+out.println("<h1>YOU Logged in at:" + 
+new java.util.Date(hs.getCreationTime()) 
++"</h1>"); 
+ out.println("<h1><a href='Page1'> Click 
+to Page 1 </a></h1>");
+ out.println("<h1><a href='Page3'> Click 
+to Page 3 </a></h1>");
+ out.println("<h1><a href='Page4'> Click 
+to Page 4 </a></h1>");
+ out.println("<h1><a 
+href='LogoutServlet'> Click to Terminate 
+Session </a></h1>");
+ out.println("</body>");
+ out.println("</html>");
+ }
+ }
+
+Page3.java
+package EJPracts;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+public class Page3 extends HttpServlet {
+ @Override
+ public void doGet(HttpServletRequest 
+request, HttpServletResponse response)
+ throws ServletException, IOException {
+ 
+response.setContentType("text/html;charset=
+UTF-8");
+ PrintWriter out = response.getWriter();
+out.println("<html><head><title>Servlet 
+Page3</title></head>");
+ HttpSession hs = 
+request.getSession(false);
+ if (hs == null){
+ out.println("<body bgcolor='red'>");
+ out.println("<h1>Session has Expired. 
+Please start a new session..</h1>");
+ out.println("<h1><a href='Page1'> Click 
+to Page 1 </a></h1>");
+ out.println("</body>");
+ out.println("</html>");
+ return;
+ }
+ out.println("<body bgcolor='lightblue'>");
+ out.println("<h1>Welcome Again on Page 
+no.3</h1>");
+ int visit = Integer.parseInt((String) 
+hs.getAttribute("visit"))+1;
+ out.println("<h1>YOU Visited" + visit +" 
+Times</h1>");
+ hs.setAttribute("visit"," "+ visit);
+ out.println("<h1>YOUR Session ID:" + 
+hs.getId() +"</h1>");
+ out.println("<h1>YOU Logged in at:" + 
+new java.util.Date(hs.getCreationTime()) 
++"</h1>"); 
+ out.println("<h1><a href='Page1'> Click 
+to Page 1 </a></h1>");
+ out.println("<h1><a href='Page2'> Click 
+to Page 2 </a></h1>");
+ out.println("<h1><a href='Page4'> Click 
+to Page 4 </a></h1>");
+ out.println("<h1><a href=LogoutServlet> 
+Click to Terminate Session </a></h1>");
+ out.println("</body>");
+ out.println("</html>");
+ }
+ }
